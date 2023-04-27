@@ -1,5 +1,4 @@
-
-
+import sys
 import pygame
 import random
 
@@ -69,10 +68,8 @@ while run:
 					move = 'right'
 				else:
 					pass
-				#
-			#
-		#
-	#
+
+
 	if move == 'wait':
 		pass
 	if move == 'up':
@@ -102,10 +99,10 @@ while run:
 	if move != 'wait':
 		for i in _snake.body[1::]:
 			if _snake.head == i:
-				window.fill(BLACK)
-				score -= 1
+				pygame.draw.rect (window, RED, pygame.Rect (_snake.head[0], _snake.head[1], 10, 10), 2, 2, 2, 2)
 				move = 'wait'
-				print('Toca')
+				score = 0
+				_snake = Snake()
 
 
 	''' Snake Speed Config '''
@@ -120,28 +117,32 @@ while run:
 
 
 	if _snake.head[0] > 380 or _snake.head[0] < 10:
-		run = False
+		move = 'wait'
+		_snake = Snake()
+		score = 0
+		level = 0
 	if _snake.head[1] > 580 or _snake.head[1] < 110:
-		run = False
+		move = 'wait'
+		_snake = Snake ()
+		score = 0
+		level = 0
 
+	'''' Draw Food  '''
+	pygame.draw.rect(window,RED,pygame.Rect(_food.pos[0],_food.pos[1],10,10),5,5,5,5)
 
-	pygame.draw.rect(window,RED,pygame.Rect(_food.pos[0],_food.pos[1],10,10))
+	'''' Green Frame '''
 	pygame.draw.rect(window,(0,255,100),pygame.Rect(0,100,400,500),10)
 	pygame.draw.rect(window,(0,255,100),pygame.Rect(0,0,400,99),10)
 
 	'''Render Score and Level info'''
-
 	text = font.render('Score',True,(255,100,10))
 	text2 = font.render ('Level', True, (255, 100, 10))
 	text3 = font.render (str(score), True, (255, 100, 10))
 	text4 = font.render (str(level), True, (255, 100, 10))
-	text5 = font2.render (str(fps), True, (255, 100, 10))
 	window.blit(text,(15,20))
 	window.blit (text3, (120, 20))
 	window.blit(text2,( 250,20))
 	window.blit(text4,( 350,20))
-	window.blit(text5,( 60,45))
-
 
 	pygame.display.flip()
 
