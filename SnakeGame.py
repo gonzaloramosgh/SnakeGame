@@ -1,4 +1,4 @@
-import sys
+
 
 import pygame
 import random
@@ -7,14 +7,15 @@ import random
 pygame.init()
 
 '''Pygame Window Config'''
-HEIGTH = 400
-WEIGHT = 600
+HEIGHT = 400
+WIDTH = 600
 
 ''' RGB Colors '''
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+BLACK = (0, 0, 0)
 
-window = pygame.display.set_mode ((HEIGTH, WEIGHT))
+window = pygame.display.set_mode ((HEIGHT, WIDTH))
 pygame.display.set_caption ('Snake Game')
 fps = pygame.time.Clock ()
 
@@ -101,7 +102,7 @@ while run:
 	if move != 'wait':
 		for i in _snake.body[1::]:
 			if _snake.head == i:
-				window.fill((0,0,0))
+				window.fill(BLACK)
 				score -= 1
 				move = 'wait'
 				print('Toca')
